@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>utlisation console</title>
+    
+
+</head>
+<body>
+    <p class="design">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias illo hic enim iusto praesentium totam et. Eaque, architecto impedit. Non illum fugiat, doloribus eos aut rerum corrupti odit. Incidunt, a!</p>
+    <button id="action">Delete design (remove .design)</button>
+    <button id="add">Add design </button>
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    <script> // output single object
+        const someObject = { str: "Some text", id: 5 };
+        console.log(someObject);
+        console.log(someObject.toString()) //[object Object]
+
+        // Output multiple object
+        const car = "Dodge Charger";
+        const anotherObject = { str: "Some text", id: 5 };
+        console.info("My first car was a", car, ". The object is:", anotherObject);
+
+        // iterator / substition
+        for (let i = 0; i < 5; i++) {
+            console.log("Hello, %s. You've called me %d times.", "Bob", i + 1);
+        }
+
+        // Stack trace
+        function foo() {
+            function bar() {
+                console.trace(); // voir chemin des appels depuis  le console.trace() 
+                //le script (anonyme) a appelé la fonction fooo qui a appeler la fct bar (faut lire a l'envers)
+            }
+            bar();
+        }
+        foo();
+
+
+        let n= null;
+        console.log(typeof(n));
+
+        let admin, name;
+        name = "geoffroy";
+        admin = name;
+        //alert (admin);
+        //alert n'affiche pas dans la console =! log 
+
+        let name2 = "Ilya";
+        // alert( `hello ${1}` ); //  quand on met back guillemet on peut cocher un truc
+        // alert( `hello ${"name2"}` ); // ?
+        // alert( `hello ${name2}` ); // ?
+
+        // let accessAllowed;
+        //     let age = prompt('How old are you?', '');
+
+        //     if (age > 18) {
+        //     accessAllowed = true;
+        //     } else {
+        //     accessAllowed = false;
+        //     }
+        //     alert(accessAllowed);
+
+
+        // let officialName;
+        let js = prompt('Quel est le nom officiel de JS?', '');
+        // if (js == 'ECMAScripts'){
+        //     officialName = "RIGHT";
+        // }else {
+        //     officialName = "you don't know ecmascript ??";
+        // }
+        // alert (officialName);
+
+        let result = js == 'ECMAScripts' ? "RIGHT" : "DUMB"
+        alert(result);
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+//il faut avoir 2 terminal
+dans 1 terminal tu lances flask et dans l'autres tu fais  curl nanana
+
+option de curl: -i : --include: inclus les entete HTTP dans la réponse
+-H : header, entête
+-X : type de requête (GET, POST, PUT,...)
+-d : data, les données envoyé
+
+curl -i http://localhost:5000/todo/api/v1.0/tasks
+
+#POST
+curl -i -H "Content-Type: application/json" -X POST -d '{"title":"Read a book"}' http://localhost:5000/todo/api/v1.0/tasks
+
+#PUT
+curl -i -H "Content-Type: application/json" -X PUT -d '{"title":"GIRL"}' http://localhost:5000/todo/api/v1.0/tasks/1
+
+#DELETE
+curl -i -X DELETE -d '{"title":"GIRL"}' http://localhost:5000/todo/api/v1.0/tasks/1
+
+curl -i -X DELETE http://localhost:5000/todo/api/v1.0/tasks/1
+
+
+#utilisatation POSTMAN
+--> new http request 
+--> selectionne GET/POST/... et ajoute URL
+--> ensuite on fait send
+--> ensuite on enregistre avec save en haut  et on choisi bien une collection 

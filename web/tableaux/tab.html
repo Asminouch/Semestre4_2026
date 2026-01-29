@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau exo</title>
+    
+
+</head>
+<body>
+
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    <script> // output single object
+    let arr = ["JavaScripts", "CSS"];
+    arr.push("PHP");
+    console.log(arr);
+    arr[(arr.length-1)/2]= "SCSS";
+    console.log(arr);
+    console.log(arr[0]);
+    arr.push("Python");
+    console.log(arr);
+
+    //.splice qui permet de nous dire ou on veut inserrer
+    //unshift pour insérer au début des tableau 
+     
+
+    function calculSumInput(){
+        let val = prompt('Donnez une valeur', '');
+        let sort=[]
+
+        if (!isNaN(val)){
+            alert("impossible")
+        }
+        else{
+            val=0
+            for(let el in sort){
+                val += parseInt(el);
+            }
+            alert(val)
+        }
+    }
+</script>
+</body>
+</html>

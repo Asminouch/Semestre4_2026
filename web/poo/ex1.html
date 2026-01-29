@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO exo</title>
+    
+
+</head>
+<body>
+
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    <script> // output single object
+    
+    function User(name, age){
+        this.name = name;
+        this.age = age;
+    }
+
+    let user1= new User("Pernelle", 20)
+
+
+
+    function say(message) {
+      return `je veux dire ${message}`;
+    }
+    console.log(typeof say);
+    console.log(Object.getPrototypeOf(say));
+    
+    let tab = ['one', 'two', 'three'];
+    console.log(typeof tab);
+    console.log(Object.getPrototypeOf(tab));
+    
+    let message = 'un string';
+    console.log(typeof message);
+    console.log(Object.getPrototypeOf(message));
+    
+    let user = {
+      firstname: 'geoffroy',
+      lastname: 'cochard',
+    }
+    console.log(typeof user);
+    console.log(Object.getPrototypeOf(user));
+
+    User.prototpe.hasAccessOf = function (elem){
+        return this.access.includes(elem)
+    }
+    console.log(user1.hasAccessOf("ghfh"))
+    console.log(user1.hasAccessOf("dcvcb"))
+
+
+    
+
+    </script>
+</body>
+</html>

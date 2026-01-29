@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau</title>
+
+</head>
+<body>
+    
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    <script >
+    let arr = new Array();
+    //let arr = [];
+
+    // 
+    let shopping = ["pain", "lait", "fromage", "houmous", "nouilles"];
+    console.log(shopping);
+
+    // Tableau imbriqué
+    let shoppingI = ["pain", "lait", ["tome de savoie", "brie", "camenbert"], "houmous", "nouilles"];
+
+
+    // mélange de valeurs
+    let arr1 = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+
+    // récupère l'objet à l'index 1 et montre ensuite son nom
+    alert( arr1[1].name ); // John
+
+    // affiche la fonction à l'index 3 et l'exécute la
+    arr1[3](); // hello
+
+    console.log(shopping[0]);
+    // renvoie "pain"
+
+    // Modification
+    shopping[0] = "crème de sésame";
+    console.log(shopping);
+    // shopping renvoie maintenant [ "crème de sésame", "lait", "fromage", "houmous", "nouilles" ]
+
+
+
+    // Pop
+    let fruitspop = ["Apple", "Orange", "Pear"];
+    console.log( fruitspop.pop() ); // supprime "Pear" et l'alerte
+    console.log( fruitspop ); // Apple, Orange
+
+    // push
+    let fruitspu = ["Apple", "Orange"];
+    fruitspu.push("Pear");
+    console.log( fruitspu ); // Apple, Orange, Pear
+
+    // shift
+    let fruitsS = ["Apple", "Orange", "Pear"];
+    console.log( fruitsS.shift() ); // supprime "Apple" et l'alerte
+    console.log( fruitsS ); // Orange, Pear
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function</title>
+    
+
+</head>
+<body>
+
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    <script> // output single object
+        
+    function pow (x,n){
+        if (n<=0){
+            alert("impossible");
+        }
+        else{
+            let res = x;
+            for (let i = 0; i < n-1; i++) {
+                res *= x;
+            }
+            return res;
+        }
+        //if isNaN(x){} is Not a Number
+    }
+
+    // alert(pow(3, 2));
+    // alert(pow(3, 3));
+    // alert(pow(3, 0));
+
+    
+
+    let age = prompt("What is your age?", 18); //met 18 par defaut
+
+    let welcome = (age < 18) ?
+    () => alert("Hello!") : //si inférieur hello
+    () => alert("Greetings!"); //si supérieur greetings
+
+    welcome(); // ok now
+
+</script>
+</body>
+</html>

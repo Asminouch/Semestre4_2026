@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    
+
+</head>
+<body>
+    <div id= container>
+
+
+    </div>
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    <script> // output single object
+
+        /**
+     * DATA
+     */
+    let events = [
+      {
+        type: 'sport', 
+        sport: 'basket', 
+        teamA: 'OLB', 
+        teamB: 'LA ROCHELLE', 
+        date: '2023-12-25'
+      },
+      {
+        type: 'sport', 
+        sport: 'foot', 
+        teamA: 'USO', 
+        teamB: 'PSG', 
+        date: '2024-01-10'
+      },
+      {
+        type: 'concert', 
+        artist: 'Machin', 
+        date: '2024-01-10'
+      },
+    ];
+
+      class Event{
+        #_date;
+        #_title;
+
+        constructor(title, dateString){
+            if (title = ""){
+                throw "The title is empty";
+
+            }
+            let date = new Date(dateString);
+            if (date instanceof Date === false){
+                throw "the date is not correct format";
+            }
+            this.#_title = title;
+            this.#_date = dateString;
+        }
+
+        get theDate(){
+            return this.#_date.toString();
+        }
+
+        get theTitle(){
+            return this.#_title;
+        }
+
+      }
+
+
+
+    class ConcertEvent extends Event{
+        #_artist;
+
+        constructor(artist, date){
+            super("Concert de ", date);
+            this.#_artist = artist;
+
+        }
+
+        get title(){
+            return `${super.title} ${this.#_artist}`;
+        }
+      }
+
+
+    class SportEvent extends Event{
+        #_teamA;
+        #_teamB;
+
+        constructor(sport, teamA,teamB, date){
+            super(`Renconte de ${sport}`, date)
+            this.#_teamA = teamA;
+            this.#_teamB = teamB;
+        }
+
+        get title(){
+            return `${super.title} entre  ${this.#_teamA} et ${this.#_teamB} `;
+        }
+      }
+    class EventFactory{
+        constructor(type, data){
+            switch(type){
+                case 'sport':
+                    return new SportEvent(data.sport, data.teamA, data.teamB, data.date);
+                    break;
+                case 'concert': 
+                    return new ConcertEvent(data.artist, data.date);
+                    break;
+                default: 
+                    break;
+            }
+        }
+    }
+
+
+    class listRender{
+        #container;
+        #list = [];
+
+        constructor(container){
+            this.#container = container;
+
+        }
+
+        set add(item){
+            this.#list.push(item);
+        }
+
+        render(){
+            let ul= document.createElement('ul');
+            for (const title of this.#list){
+                let li = document.createElement('li');
+                li.textContent = title;
+                ul.append(li);
+
+            }
+
+            let container = document.querySelector(this.#container);
+            container.append(ul);
+        }
+    }
+// let c = document.querySelector('#container');
+// events.forEach((values) =>{
+//     let e = new EventFactory(values.type, values);
+//     console.log(e.title);
+//     c.innerHTML += `<p> ${e.title} </p>`
+// });
+
+
+let list = new listRender('#container');
+events.forEach ((values) =>{
+    let e = new EventFactory(values.type, values);
+    list.add = e.title;
+});
+list.render()
+</script>
+</body>
+</html>
