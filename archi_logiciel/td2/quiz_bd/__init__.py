@@ -1,3 +1,4 @@
-from.app import app
-import quiz.views
-import quiz.models
+from.app import app, db
+import quiz_bd.views
+import quiz_bd.models
+import quiz_bd.commands

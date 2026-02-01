@@ -5,6 +5,7 @@ from.models import *
 @app.route('/quiz/api/v1.0/questionaires', methods = ['GET'])
 def get_questionnaires() :
     public_questionaires = []
+    questionnaires = get_all_questionnaires()
     for q in questionnaires :
         public_questionaires.append(q.to_json())
     return jsonify ({'questionnaires':public_questionaires})

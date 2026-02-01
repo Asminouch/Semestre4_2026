@@ -1,9 +1,34 @@
 import json 
+from .app import db
 
 ID =0
-questionnaires=[]
+#questionnaires=[]
 
-class Questionnaire:
+class Question(db.Model):
+    __tablename__ = 'questions'
+    id = db.Column(db.Integer, primary_key=True)
+    num = db.Column(db.Integer)
+    enonce = db.Column(db.String(200))
+
+    questionnaire_id = db.Column(db.Integer, db.ForeignKey('questionnaires.id'))
+
+    def __init__(self, num, enonce, questionnaire_id):
+        self.num = num
+        self.enonce = enonce
+        self.questionnaire_id = questionnaire_id
+
+    def to_json(self):
+        x= {"num": self.num, "enonce": self.enonce }
+        return x
+
+class Questionnaire(db.Model):
+    
+
+    __tablename__ = 'questionnaires'
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(200), nullable=False)
+
+    question = db.relationship('Question', backref='questionnaire', lazy=True)
     
 
     def __init__(self, id, nom):
@@ -18,7 +43,7 @@ class Questionnaire:
 
     def to_json(self):
         quest_json=[]
-        for q in self.liste_q:
+        for q in self.question:
             quest_json.append(q.to_json())
         x= {"id": self.id,
             "nom": self.nom,
@@ -42,13 +67,11 @@ class Questionnaire:
                 self.liste_q.remove(q)
 
 def get_all_questionnaires():
-    return questionnaires
+    return Questionnaire.query.all()
 
 def get_questionnaire_id(id):
-    for i in range(len(questionnaires)):
-        if questionnaires[i].get_id() == id:
-            return questionnaires[i]
-    return None
+    return Questionnaire.query.get(id)
+   
 
 
 def create_quest(nom):
@@ -56,35 +79,15 @@ def create_quest(nom):
     ID +=1
     
     quest = Questionnaire(ID, nom)
-    questionnaires.append(quest)
+    db.session.add(quest)
+    db.session.commit()
     return quest
 
 
 def delete_quest(id):
-    for el in questionnaires:
-        if el.get_id() == id:
-            questionnaires.remove(el)
-
-
-    
-
-#get_all_questionnaires()
-create_quest("plat")
-create_quest("salut")
-create_quest("hello")
-print(get_questionnaire_id(1))
-
-
-
-class Question():
-    def __init__(self, num, enonce):
-        self.num = num
-        self.enonce = enonce
-
-    def to_json(self):
-        x= {"num": self.num, "enonce": self.enonce }
-        return x
-
-
+    quest = get_questionnaire_id(id)
+    if quest:
+        db.session.delete(quest)
+        db.session.commit()
 
 

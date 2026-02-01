@@ -1,2 +1,2 @@
-FLASK_APP = quiz
+FLASK_APP = quiz_bd
 FLASK_DEBUG =1
