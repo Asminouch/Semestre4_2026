@@ -98,4 +98,16 @@ def delete_quest(id):
         db.session.delete(quest)
         db.session.commit()
 
+class QuestionOuverte(Question):
+    id = db.Column(db.Integer, primary_key=True)
+    num = db.Column(db.Integer)
+    enonce = db.Column(db.String(200))
 
+    questionnaire_id = db.Column(db.Integer, db.ForeignKey('questionnaires.id'))
+    pass
+
+
+
+
+class QuestionChoixMultiple(Question):
+    pass
