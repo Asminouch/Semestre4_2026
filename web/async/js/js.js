@@ -64,5 +64,26 @@ loadAllScript()
 //     .then(result => loadScript('js/3.js'))
 //     .catch(error => console.log(error));
 
+//todo 3
 
+async function rechercheUsername() {
+    const username = prompt("Entrez un nom d'utilisateur:");
+    const url = `https://jsonplaceholder.typicode.com/users?username=${username}`;
 
+    let response = await fetch(url);
+    if (!response.ok) {
+        alert("HTTP-Error: " + response.status);
+        return;
+    }else {
+        let users = await response.json();
+
+        if (users.length === 0) {
+            alert("aucun utilisateur trouvé");
+        }
+        console.log(users);
+
+    }
+}
+
+rechercheUsername();
+//Bret, Antonette
