@@ -20,6 +20,9 @@ class Question(db.Model):
     def to_json(self):
         x= {"num": self.num, "enonce": self.enonce }
         return x
+    
+    def set_num(self, num):
+        self.num = num
 
 class Questionnaire(db.Model):
     
@@ -28,7 +31,7 @@ class Questionnaire(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(200), nullable=False)
 
-    question = db.relationship('Question', backref='questionnaire', lazy=True)
+    liste_q = db.relationship('Question', backref='questionnaire', lazy=True)
     
 
     def __init__(self, id, nom):
@@ -43,7 +46,7 @@ class Questionnaire(db.Model):
 
     def to_json(self):
         quest_json=[]
-        for q in self.question:
+        for q in self.liste_q:
             quest_json.append(q.to_json())
         x= {"id": self.id,
             "nom": self.nom,
@@ -57,14 +60,20 @@ class Questionnaire(db.Model):
 
     def add_question(self, enonce):
         num = len(self.liste_q) + 1
-        quest = Question(num, enonce)
+        quest = Question(num, enonce, self.id)
         self.liste_q.append(quest)
+        db.session.commit()
         return quest
 
     def supp_question(self, num):
+        i=0
         for q in self.liste_q:
             if q.num == num:
                 self.liste_q.remove(q)
+                self.q.set_num()
+                db.session.commit()
+
+        
 
 def get_all_questionnaires():
     return Questionnaire.query.all()
@@ -72,7 +81,6 @@ def get_all_questionnaires():
 def get_questionnaire_id(id):
     return Questionnaire.query.get(id)
    
-
 
 def create_quest(nom):
     global ID
