@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Attributes / </title>
+</head>
+<body user-id="1">
+    <!-- <h1 id="username"></h1>
+    <p id="access"></p> -->
+
+    <div id="div"></div>
+
+<ul>
+        <li class="user-select" data-user-id="1">User 1</li>
+        <li class="user-select" data-user-id="2">User 2</li>
+    </ul>
+
+    <script>
+        let users = [
+            {
+                id: 1,
+                username: 'username1',
+                access: ['api', 'bo'],
+            },
+            {
+                id: 2,
+                username: 'username2',
+                access: ['api2', 'bo2'],
+            }
+        ];
+
+
+        let user_id = document.body.getAttribute("user-id");
+        let user = users.find((user)=>user.id == user_id);
+        
+        
+        //modifier dom
+        // document.querySelector("h1").textContent = user.username;
+        // document.querySelector("#access").textContent = user.access.join(' / ');
+
+        div.insertAdjacentHTML('beforebegin', '<p>Hello</p>');
+        div.insertAdjacentHTML('afterend', '<p>Bye</p>');
+        
+
+        let elems = document.querySelectorAll('li');
+        for (const elt of elems ){
+            elt.style.cursor= 'pointer';
+            elt.addEventListener('click', function(e) {
+                console.log(elt);
+                console.log(this);
+                console.log(e);
+                console.log(e.target)
+                let  = +elt.dataset.userId;
+                let user = user.find((user)=>id == user_id)
+                document.querySelector('h1').textContent()= user.username
+                document.querySelector('p').textContent()= user.access.join()
+            })
+        }
+
+
+        
+
+    </script>
+</body>
+</html>

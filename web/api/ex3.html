@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM events</title>
+</head>
+<body>
+    <!-- <p onclick="this.style.color='blue'">Un paragraphe qui change de couleur au click</p> -->
+<!-- quand on clique sur li ca ffiche info dans h1 et p -->
+    <ul>
+        <li class="user-select" data-user-id="1">User 1</li>
+        <li class="user-select" data-user-id="2">User 2</li>
+    </ul>
+    <h1 id="username"></h1>
+    <p id="access"></p>
+    <script>
+        let users = [
+            {
+                id: 1,
+                username: 'username1',
+                access: ['api', 'bo'],
+            },
+            {
+                id: 2,
+                username: 'username2',
+                access: ['api', 'fo'],
+            }
+        ];
+
+
+        // let p = document.querySelector('#change');
+        // p.addEventListener('click', function() {
+        //     this.style.color='blue';
+        // });
+
+        let elems = document.querySelectorAll('li');
+        for (const elt of elems ){
+            elt.style.cursor= 'pointer';
+            elt.addEventListener('click', function(e) {
+                console.log(elt);
+                console.log(this);
+                console.log(e);
+                console.log(e.target)
+                let user_id = +elt.dataset.userId;
+                let user = user.find((user)=>id == userId)
+                document.querySelector('h1').textContent()= user.username
+                document.querySelector('p').textContent()= user.access.join()
+            })
+        }
+
+    </script>
+</body>
+</html>

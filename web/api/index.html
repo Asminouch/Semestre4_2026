@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Traversing</title>
+</head>
+<body>
+    <h1>Une présentation d'une liste</h1>
+    <ul id="liste">
+        <li>Liste item 1</li>
+        <li>Liste item 2</li>
+        <li>Liste item 3</li>
+    </ul>
+    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <script>
+        // for(let i=0; i<document.body.childNodes.length; i++){
+        //     console.log(document.body.childNodes[i]);
+        // }
+
+        //parcours par el
+        for(const node of document.body.childNodes){ //si on fait children a la place de childsNordeon recupere plus les texte (on utilise plus ca)
+            console.log(node);
+        }
+        console.log(document.querySelector("#liste li:last-child"));
+
+        //pop up qui s'affichent avec tagname de l'elmenet du DOM
+        document.body.sayTagName = function() {
+            alert(this.tagName);
+        };
+        document.body.sayTagName(); // BODY (la valeur de "this" dans la méthode est document.body)
+
+    </script>
+</body>
+</html>
