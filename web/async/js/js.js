@@ -81,9 +81,15 @@ async function rechercheUsername() {
             alert("aucun utilisateur trouvé");
         }
         console.log(users);
-
+        addEventListener
     }
 }
+//bouton ne fonctionnne pas
+// let button = document.querySelector('#action');
+// button.addEventListener('click', function(e){
+//             console.log("click sur action");
+//             let paragraphe = document.querySelector('p');
+//             paragraphe.classList.remove('design');});
 
 rechercheUsername();
 //Bret, Antonette
