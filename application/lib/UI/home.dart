@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'mytheme.dart';
+import 'page1.dart';
+import 'page2.dart';
+import 'page3.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -23,10 +26,11 @@ class _BottomNavigationBarState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('Index 0: Home', style: optionStyle),
-    Text('Index 1: Business', style: optionStyle),
-    Text('Index 2: School', style: optionStyle),
+    Page1(),
+    Page2(),
+    Page3(),
   ];
+
 
   void _onItemTapped(int index) {
     setState(() {
