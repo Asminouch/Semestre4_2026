@@ -12,6 +12,7 @@ class Task {
   String description;
   Task({required this.id,required this.title,required this.tags,required
   this.nbhours,required this.difficuty,required this.description});
+
   static List<Task> generateTask(int i){
     List<Task> tasks=[];
     for(int n=0;n<i;n++){
