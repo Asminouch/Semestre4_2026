@@ -34,7 +34,18 @@ def delete_question (quest_id) :
     delete_quest(quest_id)
     return jsonify ({'questionnaire':"delete"})
 
-
+@app.route('/quiz/api/v1.0/questionaires/<int:quest_id>', methods = ['PUT'])
+def update_questionaire (quest_id) :
+    quest = get_questionnaire_id(quest_id)
+    if quest is None:
+        abort(404)
+    if not request.json:
+        abort(400)
+    nom= request.json.get('nom')
+    if nom:
+        quest.nom = nom
+    db.session.commit()
+    return jsonify ({'questionnaire modifié':quest.to_json()})
 
 ##### Route avec Question ######
 @app.route('/quiz/api/v1.0/questionaires/<int:quest_id>/questions', methods = ['GET'])
@@ -85,3 +96,35 @@ def supprimer_question(quest_id, question_num):
         abort(400)
     q.supp_question(question_num)
     return jsonify ({'questionnaire':q.to_json()})
+
+
+@app.route('/quiz/api/v1.0/questionaires/<int:quest_id>/questions/<int:question_num>', methods = ['PUT'])
+def update_question(quest_id, question_num):
+    q= get_questionnaire_id(quest_id)
+    if q is None:
+        abort(400)
+
+    question = None
+    for q in q.liste_q:
+        if q.num == question_num:
+            question = q
+            break
+    if question is None:
+        abort(404)
+    if not request.json:
+        abort(400)
+
+    if 'enonce' in request.json:
+        question.enonce = request.json['enonce']
+    if question.type == "question_ouverte":
+        if 'response' in request.json:
+            question.rep = request.json['response']
+    if question.type == "question_choix_multiple":
+        if 'prop1' in request.json:
+            question.prop1 = request.json['prop1']
+        if 'prop2' in request.json:
+            question.prop2 = request.json['prop2']
+        if 'rep_multiple' in request.json:
+            question.rep_multiple = request.json['rep_multiple']
+    db.session.commit()
+    return jsonify ({'question modifiée':question.to_json()})
