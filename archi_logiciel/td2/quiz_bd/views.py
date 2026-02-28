@@ -54,9 +54,28 @@ def ajout_question(quest_id):
     q= get_questionnaire_id(quest_id)
     if q is None:
         abort(400)
-    if not request.json or not 'enonce' in request.json :
+    if not request.json or not 'type' in request.json :
         abort(400)
-    quest = q.add_question(request.json['enonce'])
+
+    num= len(q.liste_q)+1
+    enonce = request.json["enonce"]
+    type_quest= request.json["type"]
+
+    if type_quest == "ouverte":
+        rep = request.json.get('response')
+        quest = QuestionOuverte(num, enonce, quest_id, rep)
+        
+
+    elif type_quest == 'choix_multiple':
+        prop1 = request.json.get('prop1')
+        prop2 = request.json.get('prop2')
+        rep_multiple = request.json.get('rep_multiple')
+        quest = QuestionChoixMultiple(num, enonce, quest_id, prop1, prop2, rep_multiple)
+        
+    else:
+        abort(400)
+    db.session.add(quest)
+    db.session.commit()
     return jsonify ({'question ajoutée':quest.to_json()})
 
 @app.route('/quiz/api/v1.0/questionaires/<int:quest_id>/questions/<int:question_num>', methods = ['DELETE'])

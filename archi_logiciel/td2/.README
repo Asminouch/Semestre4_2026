@@ -1,0 +1,31 @@
+## 1. Installation ##
+
+Pour lancer l'application il faut tout d'abord créer un environnement virtuel avec la commande:
+
+#### Sous Windows: ####
+    python -m venv venv 
+Ensuite l'activer avec la commande: 
+
+    venv\Scripts\activate
+
+#### Sous Linux: ####
+     virtualenv -p python3 venv
+Ensuite l'activer avec la commande: 
+
+    source venv/bin/activate
+
+Ensuite il faut installer les dépendances nécessaire avec : `pip install -r requirements.txt`
+
+## 2. Création de la base de données ##
+
+La base de donnée est crée avec `flask syncdb`
+
+Cette commande permet de détruire les tables si elles éxistent déjà, de les recrées et d'initialiser la bd avec un questionnaire "Maths"
+
+## 3. Lancement de l'application ## 
+
+Dans un terminale déplacez-vous dans le dossier `td2` et faites `flask run`. Le serveur est démarré
+
+## 4. Test de l'application avec les curl ##
+
+Dans un second terminal vous pouvez tester les curls présent dans le fichier "curl.txt"

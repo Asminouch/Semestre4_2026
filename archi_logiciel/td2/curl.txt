@@ -1,10 +1,18 @@
 //il faut avoir 2 terminal
 dans 1 terminal tu lances flask et dans l'autres tu fais  curl nanana
 
-option de curl: -i : --include: inclus les entete HTTP dans la réponse
+
+#####################  option de curl:  #######################
+-i : --include: inclus les entete HTTP dans la réponse
 -H : header, entête
 -X : type de requête (GET, POST, PUT,...)
 -d : data, les données envoyé
+
+
+#####################  Liste des curl  ########################
+###############################################################
+
+##################### Questionnaire #####################
 
 #POST
 curl -i -H "Content-Type: application/json" -X POST -d '{"nom":"hola"}' http://localhost:5000/quiz/api/v1.0/questionaires
@@ -12,14 +20,25 @@ curl -i -H "Content-Type: application/json" -X POST -d '{"nom":"hola"}' http://l
 #POST
 curl -i -X DELETE http://localhost:5000/quiz/api/v1.0/questionaires/2
 
-#Avec Question
+#####################  Avec Question #####################
 #POST
 curl -i -H "Content-Type: application/json" -X POST -d '{"enonce":"Quelle ?"}' http://localhost:5000/quiz/api/v1.0/questionaires/1/questions
-#powershell
-Invoke-RestMethod -Method Post -Uri "http://localhost:5000/quiz/api/v1.0/questionaires/1/questions" -ContentType "application/json" -Body '{"enonce":"Quelle est la capitale de la France ?"}'
 
 #DELETE
 curl -i -X DELETE http://localhost:5000/quiz/api/v1.0/questionaires/1/questions/1
 
-#powershell
+#####################  Avec héritage #####################
+#post question ouverte
+curl -X POST -H "Content-Type: application/json" -d '{"type":"ouverte","enonce":"Que signifie API ?","response":"Application Programming Interface"}' http://localhost:5000/quiz/api/v1.0/questionaires/2/questions
+
+#post question multiple
+curl -X POST -H "Content-Type: application/json" -d '{"type":"choix_multiple","enonce":"Combien font 2+2 ?","prop1":"3","prop2":"4","rep_multiple":2}' http://localhost:5000/quiz/api/v1.0/questionaires/1/questions
+
+#####################  powershell #####################
+#POST Question
+Invoke-RestMethod -Method Post -Uri "http://localhost:5000/quiz/api/v1.0/questionaires/1/questions" -ContentType "application/json" -Body '{"enonce":"Quelle est la capitale de la France ?"}'
+
+#DELETE Question
 Invoke-RestMethod -Method Delete -Uri "http://localhost:5000/quiz/api/v1.0/questionaires/1/questions/1"                                                            
+
+
