@@ -40,6 +40,9 @@ function affiche_liste(liste){
     let elem = document.querySelector('#taches');
     let ul = document.createElement("ul");
     elem.innerHTML = "";
+    ul.addEventListener('mouseover', function(event){event.target.style.color = "orange";
+        setTimeout(function(){event.target.style.color = "";}, 100);
+     });
 
     for (const tache of liste){
         let li = document.createElement('li');
@@ -139,6 +142,11 @@ async function creer_tache(){
     let description = document.querySelector("#description").value;
     let done = document.querySelector("#done").checked;
 
+    if(title === ""){
+        alert("Vous n'avez pas mis de titre");
+        return;
+    }
+
     await fetch ("http://localhost:5000/todo/api/v1.0/tasks",{
         method : "POST",
         headers : {"Content-Type" : "application/json"},
@@ -148,6 +156,7 @@ async function creer_tache(){
             done : done
         })
     }
-);
+);  
+    document.querySelector("#currenttask").innerHTML = "";
     recupTache();
 }
