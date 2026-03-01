@@ -1,0 +1,34 @@
+# Api Task 
+
+## 1. Installation ##
+
+Pour lancer l'application il faut tout d'abord créer un environnement virtuel avec la commande:
+
+#### Sous Windows: ####
+    python -m venv venv 
+Ensuite l'activer avec la commande: 
+
+    venv\Scripts\activate
+
+#### Sous Linux: ####
+     virtualenv -p python3 venv
+Ensuite l'activer avec la commande: 
+
+    source venv/bin/activate
+
+Ensuite il faut installer les dépendances nécessaire avec : `pip install -r requirements.txt`
+
+## 2. Lancement de l'API ## 
+
+Dans un terminal déplacez-vous dans le dossier `api_task` et faites `flask run`. Le serveur est démarré
+
+## 3. Lancement du client ##
+
+
+Pour lancer l'application web il faut ouvrir le fichier  `todoacompleter.html` dans un navigateur web en double-cliquant sur le fichier ou en glissant le fichier dans un navigateur web. 
+
+Ensuite il faut cliquer sur "Récupérer les taches" pour récupérer les tâches depuis l'API.
+
+Le client permet de consulter, ajouter, modifier et supprimer des tâches.
+
+Remarque: l'API doit être lancé avant d'utiliser le client
