@@ -4,6 +4,7 @@
 //https://www.reddit.com/r/learnjavascript/comments/1m1b448/async_await_vs_fetch_then_catch/ 
 //differe, document.onload(), ==> attendre dom chargé et apres on met le listener
 
+
 async function recupTache(){
     const url = `http://localhost:5000/todo/api/v1.0/tasks`;
 
@@ -13,52 +14,140 @@ async function recupTache(){
         alert("HTTP-Error: " + response.status);
         return;
     }else {
-        let users = await response.json();
+        // let users = await response.json();
 
-        if (users.length === 0) {
+        let data = await response.json();
+        console.log(data);
+
+        affiche_liste(data.tasks)
+
+
+        if (data.length === 0) {
             alert("aucun utilisateur trouvé");
         }
-        console.log(users);
+        console.log(data);
         let p = document.querySelector('#button');
         p.onclick = function() {
             this.style.color='blue';
-  }
+        }
     }
 }
 
-
-// function render(){
-//     let list=[]
-//     let ul= document.createElement('ul');
-//     for (const title of #list){
-//         let li = document.createElement('li');
-//         li.textContent = title;
-//         ul.append(li);
-//     }
-
-//     let container = document.querySelector(#nav1);
-//     container.append(ul);
-// }
-
-
-// let list = new listRender('#nav1');
-// events.forEach ((values) =>{
-//     let e = new EventFactory(values.type, values);
-//     list.add = e.title;
-// });
-// list.render(list, "#nav1")
+let current_task = null;
 
 function affiche_liste(liste){
-    let elem = document.querySelector('#nav1');
+
+    let elem = document.querySelector('#taches');
     let ul = document.createElement("ul");
+    elem.innerHTML = "";
 
-    for (const title of liste){
+    for (const tache of liste){
         let li = document.createElement('li');
-        li.textContent = title;
-        ul.append(li);
+        li.textContent = tache.title;
 
+        li.addEventListener('click', function() {
+            affiche_tache(tache);});
+        ul.appendChild(li);
+
+    }
     elem.appendChild(ul);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    let bouton = document.querySelector('#button');
+    bouton.addEventListener('click', recupTache);
+    document.querySelector("#del").addEventListener("click", supprimer_tache);
+    document.querySelector("#add").addEventListener("click", ajouter_tache);
+});
+function affiche_tache(tache){
+    current_task = tache;
+    let zone = document.querySelector("#currenttask")
+
+    zone.innerHTML = `
+    <label> titre </label><br>
+    <input type = "text" id ="title" value = "${tache.title}"><br><br>
+
+    <label> description </label><br>
+    <textarea id="description">${tache.description}</textarea><br><br>
+
+    <label> Tache terminée ? </label><br>
+    <input type="checkbox" id="done" ${tache.done ? "checked" : ""}><br><br>
+
+    <button id="save">Sauvegarder</button>`;
+
+    document.querySelector("#save").addEventListener('click', sauvegarder_tache);
+
+}
+
+
+async function sauvegarder_tache(){
+    let title = document.querySelector("#title").value;
+    let description = document.querySelector("#description").value;
+    let done = document.querySelector("#done").checked;
+
+    let response = await fetch (current_task.uri,{
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            title: title,
+            description: description,
+            done: done
+        })
+    });
+
+    console.log(response.status)
+    if (response.ok) {
+    recupTache(); // Recharger la liste des tâches
     }
 }
-affiche_liste(["saliut", "hello", "hola"])
 
+async function supprimer_tache(){
+
+    if(!current_task){
+        alert ("Sélectionne une tâche");
+        return;
+    }
+    
+    await fetch(current_task.uri,
+        {method : "DELETE"}
+    );
+    current_task = null;
+    document.querySelector("#currenttask").innerHTML = "";
+    recupTache();
+}
+
+function ajouter_tache(){
+    let zone = document.querySelector("#currenttask")
+
+    zone.innerHTML = `
+    <label> titre </label><br>
+    <input id ="title"><br>
+
+    <label> description </label><br>
+    <textarea id="description"></textarea><br>
+
+    <label> Tache terminée ? </label><br>
+    <input type="checkbox" id="done"><br>
+
+    <button id="create">Créer tâche</button>`;
+    
+    document.querySelector("#create").addEventListener("click", creer_tache);
+}
+
+async function creer_tache(){
+    let title = document.querySelector("#title").value;
+    let description = document.querySelector("#description").value;
+    let done = document.querySelector("#done").checked;
+
+    await fetch ("http://localhost:5000/todo/api/v1.0/tasks",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({
+            title : title,
+            description : description,
+            done : done
+        })
+    }
+);
+    recupTache();
+}
