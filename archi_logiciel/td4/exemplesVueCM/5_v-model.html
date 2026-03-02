@@ -1,0 +1,15 @@
+ <div id="app" class="container">
+  	<input v-model="message"> {{ message }}
+  </div>
+  <script type="module">
+    import { createApp } from
+  	"https://unpkg.com/vue@3/dist/vue.esm-browser.js" 
+    createApp({
+      data() {
+        return {
+          message: 'Hello Vue.js!'
+        }
+      }
+      }
+    ).mount('#app')
+  </script>

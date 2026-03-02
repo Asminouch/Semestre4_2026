@@ -1,0 +1,32 @@
+  <div id="app">
+    <p>{{ seconds }}</p>
+    <span class="input-group-btn">
+    <button v-on:click="stoppe"
+      class="btn btn-default" 
+      type="button">Stop</button>
+    </span>
+  </div>
+  <script type="module">
+    import { createApp }  from
+  	"https://unpkg.com/vue@3/dist/vue.esm-browser.js" 
+    createApp({
+      data() {
+        return {
+          seconds: 0
+        }
+      },
+      methods: {
+        stoppe: function() {
+          clearInterval(this.$interval)
+            }
+      },
+      mounted() {
+        this.$interval = setInterval( () => {
+          this.seconds++;
+        }, 1000)
+      },
+      beforeUnmount(){
+        clearInterval(this.$interval);
+      }
+    }).mount('#app')
+  </script>

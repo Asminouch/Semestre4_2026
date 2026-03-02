@@ -1,0 +1,38 @@
+<div id="app">
+  <h1 v-bind:title="compteur"> titre  </h1>
+  <input v-model = "titre">
+  <p>{{ message }}
+  {{ compteur }}</p>
+  
+
+  <p v-if="compteur % 10 === 0"> est Multiple de 10</p>
+	<p v-else> Non divisible par 10</p>
+
+
+  <span class="input-group-btn">
+    <button v-on:click="incremente" 
+      class="btn btn-default" 
+      type="button">incrementer</button>
+    </span>
+
+</div>
+<script type="module">
+  import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+  createApp({
+    data() {
+      return {
+        message: 'Compteur: ',
+        compteur :0 ,
+        estMultiple10 : false,
+        titre: "Title"
+      }
+    },
+    methods: {
+      incremente: function(){
+        this.compteur = this.compteur +1
+      }
+    }
+
+
+  }).mount('#app')
+</script>

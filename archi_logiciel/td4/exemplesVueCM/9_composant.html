@@ -1,0 +1,15 @@
+<div id="app">
+  <mon-composant></mon-composant>
+</div>
+
+<script type="module">
+  import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  
+  createApp({
+    components: {
+      'mon-composant': {
+        template: '<h2> Hello Vue.js !</h2>'
+      }
+    }
+  }).mount('#app') 
+</script>

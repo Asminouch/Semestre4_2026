@@ -1,0 +1,19 @@
+<div id="app">
+    <h2>{{ title }}</h2>
+    <ul>
+      <li>{{ items[0] }}</li>
+      <li>{{ items[1] }}</li>
+     </ul>
+</div>
+<script type="module">
+  import { createApp } from
+  	"https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+  createApp({
+    data() {
+      return {
+        items: ['Courses', 'Apprendre REST'], 
+        title: 'Ma liste de taches'
+      }
+    }
+  }).mount('#app')
+</script>
