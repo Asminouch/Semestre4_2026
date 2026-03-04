@@ -5,28 +5,41 @@ import '/models/task.dart';
 List<int> colorCodes= <int>[600, 500, 100];
 List<String> entries = <String>['A', 'B', 'C'];
 int _selectedIndex = 0;
-List<Task> task =Task.generateTask(5);
+
 
 class Page1 extends StatelessWidget {
-  const Page1();
+  final List<Task> myTasks =Task.generateTask(5);
+
+  Page1({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: const EdgeInsets.all(8),
 
-      itemCount: task.length,
+      itemCount: myTasks.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          height: 50,
-          color: Colors.amber[colorCodes[index]],
+        return Card(
+          color: Colors.white,
+          elevation: 7,
+          margin: const EdgeInsets.all(10),
           child: ListTile(
-            title: Text(task[index].title),
-            subtitle:Text(task[index].tags.join(" ")),
+            leading: CircleAvatar(backgroundColor: Colors.lightBlue, child: Text(myTasks[index].id.toString())),
+            title: Text(myTasks[index].title),
+            subtitle:Text(myTasks[index].tags.join(" ")),
+            trailing: IconButton(
+              icon: const Icon (Icons.edit),
+              onPressed: (){
+                // jsp
+              },
           ),
+          ),
+
         );
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }
+

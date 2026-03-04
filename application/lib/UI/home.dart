@@ -25,10 +25,10 @@ State<MyHomePage> createState() => _BottomNavigationBarState();
 class _BottomNavigationBarState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     Page1(),
-    Page2(),
-    Page3(),
+    const Page2(),
+    const Page3(),
   ];
 
 
