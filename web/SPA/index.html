@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constitution</title>
+    <script src ="./js/services/articleProvider.js" type = "module"></script>
+
+</head>
+<body>
+    <main id="main">
+
+    </main>
+    <h1> Constitution </h1>
+
+    <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
+    
+    <script type = "module"> 
+    import ArticleProvider from "./js/services/articleProvider.js"
+    const article = await ArticleProvider.fetchArticle()
+    console.log(article) ;
+    
+    import About from  './js/views/pages/About.js'
+    let main = document.querySelector("#main")
+    let content = await About.render();
+    main.innerHTML(content)
+    </script>
+</body>
+</html>
