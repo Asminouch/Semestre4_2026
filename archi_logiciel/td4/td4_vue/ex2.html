@@ -1,4 +1,5 @@
 <head>
+  <!-- note avec photo props, bind, signal -->
   <meta charset="UTF-8">
   <style>
     .terminee {
@@ -10,16 +11,34 @@
 
 <div id="app">
   <h1>{{ titre }} </h1>
-    <ul>
-        <li v-for ="el in liste"> 
-            <input type="checkbox" class = terminee v-model ="checked" >
-            <label for="el">{{ el }}</label>
-         </li>
-         
+ 
 
+    <ul>
+        <li v-for ="el in liste" :class = "{terminee:el.checked}" >  
+          <!-- : v-bind -> uni-directionnelle, v-model = bi-directionnelle ->input  -->
+            <input type="checkbox" v-model =el.checked >
+            <label for="el">{{ el.nom }}</label>
+            <span class="input-group-btn">
+            <button v-on:click="supprimer" 
+              class="btn btn-default" 
+              type="button"
+              
+              >Supprimer tache</button>
+    </span>
+
+         </li>
+        
     </ul>
 
-
+    <input @keyup.enter="ajout" type="text" v-model = "new_tache">
+    <span class="input-group-btn">
+    <button v-on:click="ajout" 
+      class="btn btn-default" 
+      type="button"
+      
+      >Ajouter tache</button>
+    </span>
+    
 </div>
 <script type="module">
   import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
@@ -27,7 +46,21 @@
     data() {
       return {
         titre: "Liste",
-        liste : ["faire course", "réviser", "devoirs"]
+        liste : [{nom: "faire course",checked : true}, {nom:"réviser",checked : true}, {nom:"devoirs",checked : false}],
+        new_tache: "", 
+      }
+    },
+    methods: {
+      ajout: function(){
+        if (this.new_tache.trim() !== ""){
+          this.liste.push({nom: this.new_tache  ,checked : false})
+          this.new_tache="";
+        }
+        
+      },
+
+      supprimer: function(i){
+        this.liste.splice(i, 1)
       }
     }
 
