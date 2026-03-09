@@ -20,4 +20,25 @@ class Task {
           }
           return tasks;
       }
+
+  static Task fromJson(Map<String, dynamic> json){
+    final tags = <String>[];
+    final Color clr;
+
+    clr = Colors.indigo;
+
+    if(json['tags'] != null){
+      json['tags'].forEach((t){
+        tags.add(t);
+      });
+    }
+
+    return Task(id: json['id'],
+        title: json['title'],
+        tags: tags,
+        nbhours: json['nbhours'],
+        difficuty: json['difficulty'],
+        description: json['description'],
+        );
+  }
 }

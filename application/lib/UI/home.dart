@@ -27,8 +27,8 @@ class _BottomNavigationBarState extends State<MyHomePage> {
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     Page1(),
-    const Page2(),
-    const Page3(),
+    Page2(),
+    Page3(),
   ];
 
 
