@@ -8,10 +8,19 @@
 
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li> <a href = "#/"> home</a></li>
+                <li> <a href = "#/articles"> Article</a></li>
+                <li> <a href = "#/about"> About </a></li>
+            </ul>
+        </nav>
+    </header>
     <main id="main">
-
+        <h1> Constitution </h1>
     </main>
-    <h1> Constitution </h1>
+    
 
     <!--  il faut mettre le code js apres le body, une fois que le dom est chargé  -->
     
@@ -22,8 +31,17 @@
     
     import About from  './js/views/pages/About.js'
     let main = document.querySelector("#main")
-    let content = await About.render();
-    main.innerHTML(content)
+    let content1 = await About.render();
+    main.innerHTML =content1;
+
+    //import ArticleAll from './js/views/pages/ArticleAll.js';
+    import ArticleShow from './js/views/pages/articleShow.js';
+    // let content  = await About.render();
+    let content  = await ArticleShow.render();
+    //let content  = await ArticleAll.render();
+
+    let url  = location;
+    console.log(location)
     </script>
 </body>
 </html>

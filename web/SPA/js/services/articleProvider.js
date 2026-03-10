@@ -1,9 +1,9 @@
-import { method } from "lodash";
+//import { method } from "lodash";
 import { ENDPOINT } from "../config.js";
-import { json } from "body-parser";
+//import { json } from "body-parser";
 
 export default class ArticleProvider{
-    static fetchArticle = async(limit = 1) => {
+    static fetchArticle = async(limit = 10) => {
         const options = {
             method: 'GET',
             headers:{
@@ -11,11 +11,11 @@ export default class ArticleProvider{
             }
         }
         try{
-            const response = await fetch( `${ENDPOINT}?_page=0${limit}`, options)
-            const JSON = await response.json();
+            const response = await fetch( `${ENDPOINT}?_page=1&_per_page=${limit}`, options)
+            const json = await response.json();
             return json.data
         }catch(err){
-            console.error(err)
+            console.error("Error getting doc", err)
         }
     }
 
@@ -28,7 +28,7 @@ export default class ArticleProvider{
         }
         try{
             const response = await fetch( `${ENDPOINT}/`+id, options)
-            const JSON = await response.json();
+            const json = await response.json();
             return json
         }catch(err){
             console.log("Error getting doc", err)
