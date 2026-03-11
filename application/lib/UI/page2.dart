@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'mytheme.dart';
 import '/models/MyAPI.dart';
+import 'detail.dart';
 
 
 class Page2 extends StatelessWidget {
@@ -37,7 +38,7 @@ class Page2 extends StatelessWidget {
                         trailing: IconButton(
                           icon: const Icon(Icons.edit),
                           onPressed: (){
-                          //Navigator.push(context, MaterialPageRoute(builder: (context) => Detail(task: snapshot.data![index])));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Detail(task: snapshot.data![index])));
                         }, ),
                       ),
                     );

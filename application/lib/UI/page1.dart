@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'mytheme.dart';
 import '/models/task.dart';
+import 'detail.dart';
 
 List<int> colorCodes= <int>[600, 500, 100];
 List<String> entries = <String>['A', 'B', 'C'];
@@ -31,7 +32,8 @@ class Page1 extends StatelessWidget {
             trailing: IconButton(
               icon: const Icon (Icons.edit),
               onPressed: (){
-                // jsp
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Detail(task: myTasks[index])));
+
               },
           ),
           ),

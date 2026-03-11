@@ -11,7 +11,7 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: myAPI.getTasks(),
+        future: myAPI.getTodo()   ,
         builder: (context,snapshot){
           if(snapshot.connectionState != ConnectionState. done && !snapshot.hasData){
 
@@ -33,8 +33,8 @@ class Page3 extends StatelessWidget {
                     margin: const EdgeInsets.all(10),
                     child:
                     ListTile(
-                      leading: CircleAvatar(backgroundColor: Colors.indigo, child: Text(snapshot.data?[index].id.toString()??""),),
-                      title: Text(snapshot.data?[index].tags.join(" ")??""),
+                      leading: CircleAvatar(backgroundColor: Colors.pink, child: Text(snapshot.data?[index].id.toString()??""),),
+                      title: Text(snapshot.data?[index].title??""),
                       trailing: IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: (){
@@ -44,7 +44,11 @@ class Page3 extends StatelessWidget {
                   );
                 });
           }
-          return Container();
+          return Center(
+            child: Column(
+              mainAxisAlignment:MainAxisAlignment.center,
+            ),
+          );
         }
     );
   }

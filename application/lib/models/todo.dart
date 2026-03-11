@@ -7,7 +7,7 @@ class Todo {
   int userid;
   int id;
   String title;
-  String completed;
+  bool completed;
 
   Todo({required this.userid, required this.id,required this.title, required this.completed});
 
