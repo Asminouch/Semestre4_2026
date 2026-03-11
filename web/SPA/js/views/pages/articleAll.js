@@ -1,7 +1,7 @@
 import ArticleProvider from "../../services/articleProvider.js";
 
 export default class ArticleAll{
-    static async render(){
+    async render(){
     let articles = await ArticleProvider.fetchArticle(10);
     let view = `
         <h2>Tous les articles</h2>
@@ -9,7 +9,7 @@ export default class ArticleAll{
             ${articles.map(
                 article =>
                     `<ul>
-                        <li>${article.title}</li>
+                        <li><a href= "#/articles/${article.id}">${article.title}</a></li>
                     </ul>`
             ).join('\n')}
         </ul>

@@ -1,6 +1,6 @@
-//import { method } from "lodash";
+
 import { ENDPOINT } from "../config.js";
-//import { json } from "body-parser";
+
 
 export default class ArticleProvider{
     static fetchArticle = async(limit = 10) => {
