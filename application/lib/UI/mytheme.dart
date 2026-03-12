@@ -96,10 +96,11 @@ class MyTheme {
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.pink,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Colors.green,
+        selectedItemColor: Colors.pink,
+        unselectedItemColor: Colors.orange,
       ),
       textTheme: darkTextTheme,
     );

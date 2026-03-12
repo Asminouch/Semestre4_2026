@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:settings_ui/settings_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'mytheme.dart';
 import 'page1.dart';
 import 'page2.dart';
 import 'page3.dart';
+import 'page4.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -16,7 +19,6 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
 
 @override
 State<MyHomePage> createState() => _BottomNavigationBarState();
@@ -29,6 +31,8 @@ class _BottomNavigationBarState extends State<MyHomePage> {
     Page1(),
     Page2(),
     Page3(),
+    EcranSettings(),
+
   ];
 
 
@@ -48,9 +52,9 @@ class _BottomNavigationBarState extends State<MyHomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Business'),
           BottomNavigationBarItem(icon: Icon(Icons.school), label: 'School'),
+          BottomNavigationBarItem(icon: Icon(Icons.contrast), label: 'Contrast'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );
