@@ -1,14 +1,29 @@
 <script>
 export default{
+    data(){
+        return{
+            changment: "",
+            check: ""
+        }
+    },
     props: {
         todo : Object
     },
     methods:{
         suppr : function() {
         this.$emit('remove',{id:this.todo.id});
+        },
+        modif : function() {
+        this.$emit('modifier',{todo:this.todo, change: this.changment});
+        this.changment= ""
+        },
+
+        fini : function() {
+        this.$emit('tache_f',{todo:this.todo, change: this.changment});
+        this.changment= ""
         }
     },
-    emits : ['remove']
+    emits : ['remove', 'modifier', "tache_f"]
 }
 </script>
 
@@ -23,6 +38,14 @@ export default{
         class="btn btn-danger"
         value="Supprimer"
         @click="suppr">
+
+
+    <input v-model="changment" @keyup.enter="" placeholder="Modif" type="text"
+    class="form-control">
+        <input type="button"
+        class="btn btn-default"
+        value="Modifier"
+        @click="modif">
         </label>
     </div>
 

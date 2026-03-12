@@ -3,7 +3,7 @@
 import TodoItem from './components/TodoItem.vue';
 
 let data = {
-  todos: [{ text: 'Faire les courses', checked: true }, { text: 'Apprendre REST', checked: false }],
+  todos: [{id:1,  text: 'Faire les courses', checked: true }, { id:2, text: 'Apprendre REST', checked: false }],
   title: 'Mes tâches',
   newItem: ''
 };
@@ -18,6 +18,7 @@ export default {
         let text = this.newItem.trim();
         if (text) {
           this.todos.push({
+            id: this.todos.length +1,
             text: text,
             checked: false
           });
@@ -26,15 +27,25 @@ export default {
 
       },
 
-      suppr : function() {
-      this.$emit('remove',{id:this.todo.id});
+      supprItem : function(todo) {
+      this.todos = this.todos.filter(item=> item.id !== todo.id);
+      },
+
+
+      modifItem : function($event) {
+        let index = this.todos.indexOf($event.todo);
+        this.todos.at(index).text = $event.change
+
+      },
+      checkItem : function($event) {
+        let index = this.todos.indexOf($event.todo);
+        this.todos.at(index).text = $event.change
+        
       },
     
-      emits : ['remove']
 
     },
     components: {TodoItem}
-
 
 }
 </script>
@@ -56,7 +67,8 @@ export default {
 
     <TodoItem v-for="item of todos"
       :todo="item"
-      @remove="suppr"      
+      @remove="supprItem"
+      @modifier="modifItem"  
       >
     
     </TodoItem>
