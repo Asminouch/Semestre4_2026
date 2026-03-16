@@ -3,8 +3,8 @@
 import TodoItem from './components/TodoItem.vue';
 
 let data = {
-  todos: [{id:1,  text: 'Faire les courses', checked: true }, { id:2, text: 'Apprendre REST', checked: false }],
-  title: 'Mes tâches',
+  todos: [{id:1,  title: 'Faire les courses', done: true }, { id:2, title: 'Apprendre REST', done: false }],
+  titre: 'Mes tâches',
   newItem: ''
 };
 
@@ -14,22 +14,47 @@ export default {
     return data;
   },
   methods: {
+    afficherItem: function () {
+      
+        const resp= fetch("http://localhost:5000/todo/api/v1.0/tasks", {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'GET',
+          body: JSON.stringify({title: text, done: false})
+        })
+        const result=  resp.json();
+        console.log(result)
+        const tasks = result.tasks
+        return tasks
+        },
+
+      
+
       addItem: function () {
+        
         let text = this.newItem.trim();
         if (text) {
-          this.todos.push({
-            id: this.todos.length +1,
-            text: text,
-            checked: false
-          });
+        fetch("http://localhost:5000/todo/api/v1.0/tasks", {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({title: text, done: false})
+        })
+        .then(res => res.json())
+        .then(data =>{
+          this.todos.push(data.task);
           this.newItem = '';
+        });
+      
         }
 
       },
 
 
       supprItem : function(todo) {
-        console.log("remove task "+ todo.id);
+        console.log("remove task "+ todo.title);
 
         fetch("http://localhost:5000/todo/api/v1.0/tasks/"+todo.id, {
           headers: {
@@ -38,19 +63,34 @@ export default {
           method: 'DELETE',
         }).then(res =>{
           if (res.ok) {
-                this.todos = this.todos.filter(item => item.id !== id);
+                this.todos = this.todos.filter(item => item.id !== todo.id);
             }
         })
       },
 
 
-
-
       modifItem : function($event) {
-        let index = this.todos.indexOf($event.todo);
-        this.todos.at(index).text = $event.change
+        console.log("MODIFIER task "+ $event.todo);
+        console.log($event)
+        console.log($event.todo.uri)
+
+        fetch($event.todo.uri, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'PUT',
+          body: JSON.stringify({
+          title: $event.change, 
+
+          })
+        }).then(res =>{
+          if (res.ok) {
+                $event.todo.text = $event.change;
+            }
+        })
 
       },
+
       checkItem : function($event) {
         let index = this.todos.indexOf($event.todo);
         this.todos.at(index).text = $event.change
@@ -78,7 +118,7 @@ export default {
 <template>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
  <div  class="container">
-<h2>{{ title }}</h2>
+<h2>{{ titre }}</h2>
   <ol>
     <!-- <li v-for= "todo in todos" 
         v-bind:class="{ 'alert alert-success': todo.checked }">
@@ -90,6 +130,7 @@ export default {
     </li> -->
 
     <TodoItem v-for="item of todos"
+      :key="item.id"
       :todo="item"
       @remove="supprItem"
       @modifier="modifItem"  

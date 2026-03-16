@@ -1,8 +1,8 @@
 <script>
 
 let data = {
-  todos: [{ text: 'Faire les courses', checked: true }, { text: 'Apprendre REST', checked: false }],
-  title: 'Mes tâches',
+  todos: [{ title: 'Faire les courses', done: true }, { title: 'Apprendre REST', done: false }],
+  titer2: 'Mes tâches',
   newItem: ''
 };
 
@@ -16,8 +16,8 @@ export default {
         let text = this.newItem.trim();
         if (text) {
           this.todos.push({
-            text: text,
-            checked: false
+            title: text,
+            done: false
           });
           this.newItem = '';
         }

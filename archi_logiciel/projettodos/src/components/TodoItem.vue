@@ -30,9 +30,9 @@ export default{
 <template>
     <!-- // Mettre le code pour afficher une tache définie par la prop todo -->
 
-    <div class="checkbox" v-bind:class="{ 'alert alert-success': todo.checked }">
+    <div class="checkbox" v-bind:class="{ 'alert alert-success': todo.done }">
         <label>
-          <input type="checkbox" v-model="todo.checked"> {{ todo.text }}
+          <input type="checkbox" v-model="todo.done"> {{ todo.title }}
 
         <input type="button"
         class="btn btn-danger"
