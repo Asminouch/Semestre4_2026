@@ -27,9 +27,23 @@ export default {
 
       },
 
+
       supprItem : function(todo) {
-      this.todos = this.todos.filter(item=> item.id !== todo.id);
+        console.log("remove task "+ todo.id);
+
+        fetch("http://localhost:5000/todo/api/v1.0/tasks/"+todo.id, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'DELETE',
+        }).then(res =>{
+          if (res.ok) {
+                this.todos = this.todos.filter(item => item.id !== id);
+            }
+        })
       },
+
+
 
 
       modifItem : function($event) {
@@ -45,9 +59,19 @@ export default {
     
 
     },
+    mounted() {
+      fetch("http://localhost:5000/todo/api/v1.0/tasks")
+        .then(response => response.json())
+        .then(json => {
+          console.log("Mounted");
+          console.log(json.tasks);
+          this.todos = json.tasks;
+        });
+    },
     components: {TodoItem}
 
 }
+
 </script>
 
 
