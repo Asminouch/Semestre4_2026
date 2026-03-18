@@ -1,4 +1,6 @@
+import 'package:application/UI/task_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'mytheme.dart';
 import '/models/task.dart';
 import 'detail.dart';
@@ -9,14 +11,16 @@ int _selectedIndex = 0;
 
 
 class Page1 extends StatelessWidget {
-  final List<Task> myTasks =Task.generateTask(5);
+  late List<Task> myTasks; //= Task.generateTask(50);
+  String tags='';
 
-  Page1({super.key});
+  //Page1({super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    myTasks = context.watch<TaskViewModel>().liste;
+    return ListView.builder(
       padding: const EdgeInsets.all(8),
 
       itemCount: myTasks.length,
@@ -40,7 +44,7 @@ class Page1 extends StatelessWidget {
 
         );
       },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      //separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

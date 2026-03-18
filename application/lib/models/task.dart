@@ -4,6 +4,7 @@ import '/UI/home.dart';
 
 
 class Task {
+  static int nb =0;
   int id;
   String title;
   List<String> tags;
@@ -40,5 +41,11 @@ class Task {
         difficuty: json['difficulty'],
         description: json['description'],
         );
+  }
+
+  factory Task.newTask(){
+    nb++; //attribut static de la classe.
+    return Task(id: nb, title: 'title $nb', tags: ['tags $nb'], nbhours:
+    nb, difficuty: nb%5, description: 'description $nb');
   }
 }

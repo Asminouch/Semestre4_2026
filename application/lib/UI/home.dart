@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'add_task.dart';
 import 'mytheme.dart';
 import 'page1.dart';
 import 'page2.dart';
@@ -8,7 +9,8 @@ import 'page3.dart';
 import 'page4.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({super.key, required this.title});
+  final String title;
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -57,6 +59,15 @@ class _BottomNavigationBarState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
+
+      floatingActionButton: _selectedIndex==0?FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => AddTask(),
+          )
+          );
+        },
+        child: const Icon(Icons.add),):const SizedBox.shrink(),
     );
   }
 }
