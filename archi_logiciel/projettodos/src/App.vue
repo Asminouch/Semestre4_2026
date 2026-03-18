@@ -16,18 +16,20 @@ export default {
   methods: {
     afficherItem: function () {
       
-        const resp= fetch("http://localhost:5000/todo/api/v1.0/tasks", {
+        const resp= fetch("http://localhost:5000/quiz/api/v1.0/questionaires", {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'GET',
-          body: JSON.stringify({title: text, done: false})
+          
         })
-        const result=  resp.json();
-        console.log(result)
-        const tasks = result.tasks
-        return tasks
-        },
+        .then(res => res.json())
+        .then(data =>{
+          console.log(data)
+          this.todos= data.questionaires;
+          
+        });
+    },
 
       
 
@@ -35,7 +37,7 @@ export default {
         
         let text = this.newItem.trim();
         if (text) {
-        fetch("http://localhost:5000/todo/api/v1.0/tasks", {
+        fetch("http://localhost:5000/quiz/api/v1.0/questionaires", {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -46,6 +48,7 @@ export default {
         .then(data =>{
           this.todos.push(data.task);
           this.newItem = '';
+          this.afficherItem();
         });
       
         }
@@ -56,7 +59,7 @@ export default {
       supprItem : function(todo) {
         console.log("remove task "+ todo.title);
 
-        fetch("http://localhost:5000/todo/api/v1.0/tasks/"+todo.id, {
+        fetch("http://localhost:5000/quiz/api/v1.0/questionaires/"+todo.id, {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -74,18 +77,18 @@ export default {
         console.log($event)
         console.log($event.todo.uri)
 
-        fetch($event.todo.uri, {
+        const url = $event.todo.uri || `http://localhost:5000/quiz/api/v1.0/questionaires/${$event.todo.id}`;
+
+        fetch(url, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'PUT',
           body: JSON.stringify({
-          title: $event.change, 
-
-          })
+          title: $event.change})
         }).then(res =>{
           if (res.ok) {
-                $event.todo.text = $event.change;
+                $event.todo.title = $event.change;
             }
         })
 
@@ -100,12 +103,12 @@ export default {
 
     },
     mounted() {
-      fetch("http://localhost:5000/todo/api/v1.0/tasks")
+      fetch("http://localhost:5000/quiz/api/v1.0/questionaires")
         .then(response => response.json())
         .then(json => {
           console.log("Mounted");
-          console.log(json.tasks);
-          this.todos = json.tasks;
+          console.log(json.questionaires);
+          this.todos = json.questionaires;
         });
     },
     components: {TodoItem}

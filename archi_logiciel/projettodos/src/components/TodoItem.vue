@@ -11,7 +11,7 @@ export default{
     },
     methods:{
         suppr : function() {
-        this.$emit('remove',{id:this.todo.id});
+        this.$emit('remove',this.todo);
         },
         modif : function() {
         this.$emit('modifier',{todo:this.todo, change: this.changment});
