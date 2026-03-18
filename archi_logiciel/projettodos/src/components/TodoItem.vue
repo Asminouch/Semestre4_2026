@@ -32,7 +32,7 @@ export default{
 
     <div class="checkbox" v-bind:class="{ 'alert alert-success': todo.done }">
         <label>
-          <input type="checkbox" v-model="todo.done"> {{ todo.title }}
+          <input type="checkbox" v-model="todo.done"> {{ todo.nom }}
 
         <input type="button"
         class="btn btn-danger"
