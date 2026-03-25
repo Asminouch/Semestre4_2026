@@ -16,7 +16,7 @@ export default {
   methods: {
     afficherItem: function () {
       
-        const resp= fetch("http://localhost:5000/quiz/api/v1.0/questionaires", {
+        const resp= fetch("http://localhost:5000/quiz/api/v1.0/questionnaires", {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -26,7 +26,7 @@ export default {
         .then(res => res.json())
         .then(data =>{
           console.log(data)
-          this.todos= data.questionaires;
+          this.todos= data.questionnaires;
           
         });
     },
@@ -36,19 +36,31 @@ export default {
       addItem: function () {
         
         let text = this.newItem.trim();
+        if(text.length === 0) {
+          return;
+        }
         if (text) {
-        fetch("http://localhost:5000/quiz/api/v1.0/questionaires", {
+        fetch("http://localhost:5000/quiz/api/v1.0/questionnaires", {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({title: text, done: false})
+          body: JSON.stringify({nom: text, done: false})
         })
         .then(res => res.json())
         .then(data =>{
-          this.todos.push(data.task);
-          this.newItem = '';
-          this.afficherItem();
+
+          const nouveau = data['questionnaire crée '];
+
+          if (nouveau && nouveau.id) {
+            this.todos.push(nouveau);
+            this.newItem="";
+
+          }
+          else{
+            this.afficherItem();
+          }
+        
         });
       
         }
@@ -57,9 +69,9 @@ export default {
 
 
       supprItem : function(todo) {
-        console.log("remove task "+ todo.title);
+        console.log("remove task "+ todo.nom);
 
-        fetch("http://localhost:5000/quiz/api/v1.0/questionaires/"+todo.id, {
+        fetch("http://localhost:5000/quiz/api/v1.0/questionnaires/"+todo.id, {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -77,7 +89,7 @@ export default {
         console.log($event)
         console.log($event.todo.uri)
 
-        const url = $event.todo.uri || `http://localhost:5000/quiz/api/v1.0/questionaires/${$event.todo.id}`;
+        const url = $event.todo.uri || `http://localhost:5000/quiz/api/v1.0/questionnaires/${$event.todo.id}`;
 
         fetch(url, {
           headers: {
@@ -85,10 +97,10 @@ export default {
           },
           method: 'PUT',
           body: JSON.stringify({
-          title: $event.change})
+          nom: $event.change})
         }).then(res =>{
           if (res.ok) {
-                $event.todo.title = $event.change;
+                $event.todo.nom = $event.change; //nom?
             }
         })
 
@@ -103,12 +115,12 @@ export default {
 
     },
     mounted() {
-      fetch("http://localhost:5000/quiz/api/v1.0/questionaires")
+      fetch("http://localhost:5000/quiz/api/v1.0/questionnaires")
         .then(response => response.json())
         .then(json => {
           console.log("Mounted");
-          console.log(json.questionaires);
-          this.todos = json.questionaires;
+          console.log(json.questionnaires);
+          this.todos = json.questionnaires;
         });
     },
     components: {TodoItem}

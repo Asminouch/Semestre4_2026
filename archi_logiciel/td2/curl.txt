@@ -15,42 +15,42 @@ dans 1 terminal tu lances flask et dans l'autres tu fais  curl nanana
 ##################### Questionnaire #####################
 
 #GET
-curl -i http://localhost:5000/quiz/api/v1.0/questionaires
+curl -i http://localhost:5000/quiz/api/v1.0/questionnaires
 
 #POST
-curl -i -H "Content-Type: application/json" -X POST -d '{"nom":"hola"}' http://localhost:5000/quiz/api/v1.0/questionaires
+curl -i -H "Content-Type: application/json" -X POST -d '{"nom":"hola"}' http://localhost:5000/quiz/api/v1.0/questionnaires
 
 #DELETE
-curl -i -X DELETE http://localhost:5000/quiz/api/v1.0/questionaires/2
+curl -i -X DELETE http://localhost:5000/quiz/api/v1.0/questionnaires/2
 
 #PUT
-curl -X PUT -H "Content-Type: application/json" -d '{"nom":"Nouveau Quiz Maths"}' http://localhost:5000/quiz/api/v1.0/questionaires/1
+curl -X PUT -H "Content-Type: application/json" -d '{"nom":"Nouveau Quiz Maths"}' http://localhost:5000/quiz/api/v1.0/questionnaires/1
 
 #####################  Avec Question #####################
 #POST
-curl -i -H "Content-Type: application/json" -X POST -d '{"enonce":"Quelle ?"}' http://localhost:5000/quiz/api/v1.0/questionaires/1/questions
+curl -i -H "Content-Type: application/json" -X POST -d '{"enonce":"Quelle ?"}' http://localhost:5000/quiz/api/v1.0/questionnaires/1/questions
 
 #DELETE
-curl -i -X DELETE http://localhost:5000/quiz/api/v1.0/questionaires/1/questions/1
+curl -i -X DELETE http://localhost:5000/quiz/api/v1.0/questionnaires/1/questions/1
 
 #####################  Avec héritage #####################
 #post question ouverte
-curl -X POST -H "Content-Type: application/json" -d '{"type":"ouverte","enonce":"Que signifie API ?","response":"Application Programming Interface"}' http://localhost:5000/quiz/api/v1.0/questionaires/2/questions
+curl -X POST -H "Content-Type: application/json" -d '{"type":"ouverte","enonce":"Que signifie API ?","response":"Application Programming Interface"}' http://localhost:5000/quiz/api/v1.0/questionnaires/2/questions
 
 #post question multiple
-curl -X POST -H "Content-Type: application/json" -d '{"type":"choix_multiple","enonce":"Combien font 2+2 ?","prop1":"3","prop2":"4","rep_multiple":2}' http://localhost:5000/quiz/api/v1.0/questionaires/1/questions
+curl -X POST -H "Content-Type: application/json" -d '{"type":"choix_multiple","enonce":"Combien font 2+2 ?","prop1":"3","prop2":"4","rep_multiple":2}' http://localhost:5000/quiz/api/v1.0/questionnaires/1/questions
 
 # PUT question ouverte
-curl -X PUT -H "Content-Type: application/json" -d '{"enonce":"Que veut dire API ?","response":"Interface de Programmation Applicative"}'http://localhost:5000/quiz/api/v1.0/questionaires/2/questions/1
+curl -X PUT -H "Content-Type: application/json" -d '{"enonce":"Que veut dire API ?","response":"Interface de Programmation Applicative"}'http://localhost:5000/quiz/api/v1.0/questionnaires/2/questions/1
 
 # PUT question multiple
-curl -X PUT -H "Content-Type: application/json" -d '{"prop1":"2","prop2":"4","rep_multiple":2}' http://localhost:5000/quiz/api/v1.0/questionaires/1/questions/1
+curl -X PUT -H "Content-Type: application/json" -d '{"prop1":"2","prop2":"4","rep_multiple":2}' http://localhost:5000/quiz/api/v1.0/questionnaires/1/questions/1
 
 #####################  powershell #####################
 #POST Question
-Invoke-RestMethod -Method Post -Uri "http://localhost:5000/quiz/api/v1.0/questionaires/1/questions" -ContentType "application/json" -Body '{"enonce":"Quelle est la capitale de la France ?"}'
+Invoke-RestMethod -Method Post -Uri "http://localhost:5000/quiz/api/v1.0/questionnaires/1/questions" -ContentType "application/json" -Body '{"enonce":"Quelle est la capitale de la France ?"}'
 
 #DELETE Question
-Invoke-RestMethod -Method Delete -Uri "http://localhost:5000/quiz/api/v1.0/questionaires/1/questions/1"                                                            
+Invoke-RestMethod -Method Delete -Uri "http://localhost:5000/quiz/api/v1.0/questionnaires/1/questions/1"                                                            
 
 

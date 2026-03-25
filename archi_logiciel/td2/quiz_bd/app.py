@@ -11,5 +11,5 @@ app = Flask ( __name__ )
 app. config ['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///'+ mkpath ('../quiz.db') )
 app. config ["SQLALCHEMY_ECHO"] = True
 
-cors = CORS(app, resources={r"/todo/api/v1.0/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/quiz/api/v1.0/*": {"origins": "*"}})
 db = SQLAlchemy (app)
